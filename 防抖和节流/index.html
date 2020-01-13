@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防抖和节流</title>
+</head>
+<body>
+    <button id='btn'>按钮</button>
+    <script>
+        const trottle = (fn, time = 1000) => {
+            let isRun = false
+            return () => {
+                if (isRun) {
+                    return
+                }
+                isRun = true
+                setTimeout(() => {
+                    fn.call(this)
+                    isRun = false
+                }, time)
+            }
+        }
+        const showTest = () => {
+            console.log(1)
+        }
+        btn.onclick = trottle(showTest)
+    </script>
+</body>
+</html>
